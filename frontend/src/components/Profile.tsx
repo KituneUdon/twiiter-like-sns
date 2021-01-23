@@ -2,18 +2,18 @@ import React, { FC } from 'react';
 
 import { Container, Row, Col } from 'react-bootstrap';
 
-import profileImage from '../image/default_profile_image.png';
+import profileIcon from '../image/default_profile_icon.png';
 import UserInfo from './UserInfo';
 
 type Props = {
-  name: string
-}
+  name: string;
+};
 
 const Profile: FC<Props> = ({ name }) => (
   <Container>
     <Row>
       <Col>
-        <img src={profileImage} alt="プロフィール画像" width="64" height="64" />
+        <img src={profileIcon} alt="プロフィール画像" width="64" height="64" />
       </Col>
       <Col>
         <p>{name}</p>
@@ -25,6 +25,6 @@ const Profile: FC<Props> = ({ name }) => (
       <UserInfo followerNumber={10} followingNumber={20} />
     </Row>
   </Container>
-)
+);
 
 export default Profile;
