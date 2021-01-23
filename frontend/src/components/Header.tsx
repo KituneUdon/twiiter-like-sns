@@ -17,7 +17,13 @@ const Header: FC = () => (
       <Nav.Link href="http://localhost:4000">Help</Nav.Link>
       <Nav.Link href="http://localhost:4000">Users</Nav.Link>
       <NavDropdown title="Account" id="collasible-nav-dropdown">
-        <NavDropdown.Item href="http://localhost:4000">test</NavDropdown.Item>
+        <NavDropdown.Item href="http://localhost:4000">
+          Profile
+        </NavDropdown.Item>
+        <NavDropdown.Item href="http://localhost:4000">
+          Settings
+        </NavDropdown.Item>
+        <NavDropdown.Item href="http://localhost:4000">Logout</NavDropdown.Item>
       </NavDropdown>
     </Nav>
   </ExtendNavbar>
