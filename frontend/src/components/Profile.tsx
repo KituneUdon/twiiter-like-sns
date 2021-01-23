@@ -7,9 +7,10 @@ import UserInfo from './UserInfo';
 
 type Props = {
   name: string;
+  postedNumber: number;
 };
 
-const Profile: FC<Props> = ({ name }) => (
+const Profile: FC<Props> = ({ name, postedNumber }) => (
   <Container>
     <Row>
       <Col>
@@ -18,7 +19,7 @@ const Profile: FC<Props> = ({ name }) => (
       <Col>
         <p>{name}</p>
         <a href="http://localhost:4000">view my profile</a>
-        <p>投稿数を表示</p>
+        <p>投稿数：{postedNumber}</p>
       </Col>
     </Row>
     <Row>

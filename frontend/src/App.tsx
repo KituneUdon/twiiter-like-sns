@@ -14,7 +14,7 @@ const App: FC = () => (
     <Container>
       <Row>
         <Col xs={4}>
-          <Profile name="kituneudon" />
+          <Profile name="kituneudon" postedNumber={1} />
           <PostForm />
         </Col>
         <Col xs={8}>
