@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { Container, ContainerItem } from './Styles';
+import { Container, Row, Col } from 'react-bootstrap';
 
 type Props = {
   followingNumber: number;
@@ -9,14 +9,16 @@ type Props = {
 
 const UserInfo: FC<Props> = ({ followingNumber, followerNumber }) => (
   <Container>
-    <ContainerItem>
-      <p>{followingNumber}</p>
-      <p>follower</p>
-    </ContainerItem>
-    <ContainerItem>
-      <p>{followerNumber}</p>
-      <p>following</p>
-    </ContainerItem>
+    <Row>
+      <Col>
+        <p>{followingNumber}</p>
+        <p>follower</p>
+      </Col>
+      <Col>
+        <p>{followerNumber}</p>
+        <p>following</p>
+      </Col>
+    </Row>
   </Container>
 )
 

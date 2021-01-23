@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { Container } from './Styles';
+import { Container, Row, Col } from 'react-bootstrap';
 
 import profileImage from '../image/default_profile_image.png';
 import UserInfo from './UserInfo';
@@ -10,17 +10,21 @@ type Props = {
 }
 
 const Profile: FC<Props> = ({ name }) => (
-  <>
-    <Container>
-      <img src={profileImage} alt="プロフィール画像" width="64" height="64" />
-      <div>
+  <Container>
+    <Row>
+      <Col>
+        <img src={profileImage} alt="プロフィール画像" width="64" height="64" />
+      </Col>
+      <Col>
         <p>{name}</p>
         <a href="http://localhost:4000">view my profile</a>
         <p>投稿数を表示</p>
-      </div>
-    </Container>
-    <UserInfo followerNumber={10} followingNumber={20} />
-  </>
+      </Col>
+    </Row>
+    <Row>
+      <UserInfo followerNumber={10} followingNumber={20} />
+    </Row>
+  </Container>
 )
 
 export default Profile;
