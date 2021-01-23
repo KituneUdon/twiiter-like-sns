@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import './App.css';
 
-const App: FC = () => <div>test</div>;
+import Profile from './components/Profile';
+
+const App: FC = () => <Profile name="kituneudon" />;
 
 export default App;
