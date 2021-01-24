@@ -1,29 +1,29 @@
 import React, { FC } from 'react';
-
 import { Container, Row, Col } from 'react-bootstrap';
+import styled from 'styled-components';
 
 import profileIcon from '../image/default_profile_icon.png';
 import UserInfo from './UserInfo';
 
-type Props = {
-  name: string;
-  postedNumber: number;
-};
+const Img = styled.img`
+  width: 100%;
+  height: auto;
+`;
 
-const Profile: FC<Props> = ({ name, postedNumber }) => (
+const Profile: FC = () => (
   <Container>
     <Row>
-      <Col>
-        <img src={profileIcon} alt="プロフィール画像" width="64" height="64" />
+      <Col xs={4}>
+        <Img src={profileIcon} alt="プロフィール画像" />
       </Col>
-      <Col>
-        <p>{name}</p>
+      <Col xs={8}>
+        <p>kituneudon</p>
         <a href="http://localhost:4000">view my profile</a>
-        <p>投稿数：{postedNumber}</p>
+        <p>投稿数：10</p>
       </Col>
     </Row>
     <Row>
-      <UserInfo followerNumber={10} followingNumber={20} />
+      <UserInfo />
     </Row>
   </Container>
 );

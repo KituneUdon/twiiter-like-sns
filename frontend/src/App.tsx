@@ -13,11 +13,11 @@ const App: FC = () => (
     <Header />
     <Container>
       <Row>
-        <Col xs={4}>
-          <Profile name="kituneudon" postedNumber={1} />
+        <Col xs={12} sm={4}>
+          <Profile />
           <PostForm />
         </Col>
-        <Col xs={8}>
+        <Col xs={12} sm={8}>
           <TimeLine />
         </Col>
       </Row>
