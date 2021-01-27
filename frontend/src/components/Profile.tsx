@@ -7,16 +7,17 @@ import UserInfo from './UserInfo';
 
 const Img = styled.img`
   width: 100%;
+  max-width: 180px;
   height: auto;
 `;
 
 const Profile: FC = () => (
   <Container>
     <Row>
-      <Col xs={4}>
+      <Col md={4} sm={12} xs={4}>
         <Img src={profileIcon} alt="プロフィール画像" />
       </Col>
-      <Col xs={8}>
+      <Col md={8} sm={12} xs={8}>
         <p>kituneudon</p>
         <a href="http://localhost:4000">view my profile</a>
         <p>投稿数：10</p>
