@@ -6,9 +6,10 @@ import defaultProfileIcon from '../image/default_profile_icon.png';
 
 type Props = {
   name: string;
+  micropost: string;
 };
 
-const TimelineElement: FC<Props> = ({ name }) => (
+const TimelineElement: FC<Props> = ({ name, micropost }) => (
   <Row xs={4}>
     <Col>
       <img
@@ -20,6 +21,7 @@ const TimelineElement: FC<Props> = ({ name }) => (
     </Col>
     <Col xs={8}>
       <a href="http://localhost:4000">{name}</a>
+      <p>{micropost}</p>
     </Col>
   </Row>
 );
