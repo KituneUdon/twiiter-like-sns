@@ -18,3 +18,7 @@ VALUES
     'Jiro', 
     'Sato'
 );
+CREATE USER 'go'@'%' IDENTIFIED BY 'p@55vv0rcl';
+/*GRANT all ON sample.* TO 'go'@'%';*/
+GRANT ALL PRIVILEGES ON *.* TO 'go'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;

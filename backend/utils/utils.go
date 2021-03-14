@@ -8,6 +8,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
+	"github.com/kenichi-morihara/go_tour/config"
 )
 
 // RespondWithError エラー情報をJSONで返す
@@ -25,7 +26,14 @@ func RespondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 
 // GetConnection DBとのコネクションを張る
 func GetConnection() *gorm.DB {
-	db, err := gorm.Open("mysql", "go:p@55vv0rcl@/sample?charset=utf8&parseTime=True&loc=Local")
+	DBMS := config.Config.DbDriverName
+	USER := config.Config.DbUserName
+	PASS := config.Config.DbUserPassword
+	DB_HOST := config.Config.DbHost
+	DB_PORT := config.Config.DbPort
+	DBNAME := config.Config.DbName
+	CONNECT := USER + ":" + PASS + "@" + "tcp(" + DB_HOST + ":" + DB_PORT + ")/" + DBNAME
+	db, err := gorm.Open(DBMS, CONNECT)
 	// 接続に失敗したらエラーログを出して終了する
 	if err != nil {
 		log.Fatalf("DB connection failed %v", err)
