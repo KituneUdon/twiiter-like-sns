@@ -1,15 +1,14 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 
-type Microposts = {
-  microposts: [Micropost];
-};
+// type MicropostsType = MicropostType[];
 
-type Micropost = {
-  userId: string;
-  micropost: string;
-};
+// type MicropostType = {
+//   user: string;
+//   micropost: string;
+// };
 
-const getTimeline = async (id: string): Promise<AxiosResponse<Microposts>> => {
+// eslint-disable-next-line
+const getTimeline = async (id: string) => {
   // URLをサーバサイドのAPIにする
   const response = await axios
     .get(`http://localhost:3000/v1/microposts?id=${id}`)

@@ -1,24 +1,29 @@
 import React, { FC, useState, useEffect } from 'react';
+import { AxiosResponse } from 'axios';
 
-import TimelineElement from './MicropostElement';
+import MicropostElement from './MicropostElement';
 
 import getMicroposts from '../apis/getMicroposts';
 
-type TypeMicroposts = {
+type MicropostsType = MicropostType[];
+
+type MicropostType = {
   user: string;
   micropost: string;
 };
 
 const Timeline: FC = () => {
-  const [microposts, setMicroposts] = useState<TypeMicroposts[]>();
+  const [microposts, setMicroposts] = useState<MicropostsType>();
   const [error, setError] = useState('');
 
-  // APIからデータを取得してstateに格納する処理を記載する
   useEffect(() => {
     const response = getMicroposts('123456');
 
     response
-      .then((m) => Array.isArray(m) && setMicroposts(m))
+      .then(
+        (m: AxiosResponse<MicropostType>) =>
+          Array.isArray(m.data) && setMicroposts(m.data),
+      )
       .catch(() =>
         setError(
           '通信エラーが発生しました。\n10分程、時間をおいてアクセスしてみてください',
@@ -35,7 +40,8 @@ const Timeline: FC = () => {
       ) : (
         Array.isArray(microposts) &&
         microposts.map((micropost) => (
-          <TimelineElement
+          <MicropostElement
+            key={micropost.micropost}
             name={micropost.user}
             micropost={micropost.micropost}
           />
