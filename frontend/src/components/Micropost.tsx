@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 
-import TimelineElement from './TimelineElement';
+import TimelineElement from './MicropostElement';
 
 import getMicroposts from '../apis/getMicroposts';
 
@@ -11,15 +11,16 @@ type TypeMicroposts = {
 
 const Timeline: FC = () => {
   const [microposts, setMicroposts] = useState<TypeMicroposts[]>();
+  const [error, setError] = useState('');
 
   // APIからデータを取得してstateに格納する処理を記載する
   useEffect(() => {
-    const response = getMicroposts();
+    const response = getMicroposts('123456');
 
     response
       .then((m) => Array.isArray(m) && setMicroposts(m))
       .catch(() =>
-        alert(
+        setError(
           '通信エラーが発生しました。\n10分程、時間をおいてアクセスしてみてください',
         ),
       );
@@ -27,15 +28,19 @@ const Timeline: FC = () => {
 
   return (
     <>
-      <p>タイムライン</p>
+      <p>Micropost Feed</p>
       <hr />
-      {Array.isArray(microposts) &&
+      {error ? (
+        <p>{error}</p>
+      ) : (
+        Array.isArray(microposts) &&
         microposts.map((micropost) => (
           <TimelineElement
             name={micropost.user}
             micropost={micropost.micropost}
           />
-        ))}
+        ))
+      )}
     </>
   );
 };

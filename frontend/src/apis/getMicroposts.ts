@@ -1,8 +1,19 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
-const getTimeline = async () => {
+type Microposts = {
+  microposts: [Micropost];
+};
+
+type Micropost = {
+  userId: string;
+  micropost: string;
+};
+
+const getTimeline = async (id: string): Promise<AxiosResponse<Microposts>> => {
   // URLをサーバサイドのAPIにする
-  const response = await axios.get('http://localhost:3000/').then((res) => res);
+  const response = await axios
+    .get(`http://localhost:3000/v1/microposts?id=${id}`)
+    .then((res) => res);
 
   return response;
 };

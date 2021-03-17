@@ -5,7 +5,7 @@ import { Container, Col, Row } from 'react-bootstrap';
 
 import Profile from './components/Profile';
 import PostForm from './components/PostForm';
-import TimeLine from './components/Timeline';
+import TimeLine from './components/Micropost';
 import Header from './components/Header';
 
 const App: FC = () => (
