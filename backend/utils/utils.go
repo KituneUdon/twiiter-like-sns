@@ -8,7 +8,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
-	"github.com/kenichi-morihara/go_tour/config"
+	"github.com/kenichi-morihara/twitter-like-sns-backend/config"
 )
 
 // RespondWithError エラー情報をJSONで返す

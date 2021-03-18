@@ -1,4 +1,4 @@
-module github.com/kenichi-morihara/go_tour
+module github.com/kenichi-morihara/twitter-like-sns-backend
 
 go 1.13
 

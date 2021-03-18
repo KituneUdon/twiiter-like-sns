@@ -1,1 +1,4 @@
+#mysqlの初期パラメータファイル
 config.ini
+#docker-composeの環境変数ファイル
+.env

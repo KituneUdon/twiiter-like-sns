@@ -7,8 +7,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/kenichi-morihara/go_tour/config"
-	"github.com/kenichi-morihara/go_tour/utils"
+	"github.com/kenichi-morihara/twitter-like-sns-backend/config"
+	"github.com/kenichi-morihara/twitter-like-sns-backend/utils"
 
 	"github.com/gorilla/mux"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
