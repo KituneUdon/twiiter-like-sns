@@ -8,8 +8,11 @@ import getMicroposts from '../apis/getMicroposts';
 type MicropostsType = MicropostType[];
 
 type MicropostType = {
-  user: string;
+  userId: string;
+  userName: string;
   micropost: string;
+  micropostId: string;
+  createAt: string;
 };
 
 const Timeline: FC = () => {
@@ -41,9 +44,10 @@ const Timeline: FC = () => {
         Array.isArray(microposts) &&
         microposts.map((micropost) => (
           <MicropostElement
-            key={micropost.micropost}
-            name={micropost.user}
+            name={micropost.userName}
             micropost={micropost.micropost}
+            createdAt={micropost.createAt}
+            key={micropost.micropostId}
           />
         ))
       )}

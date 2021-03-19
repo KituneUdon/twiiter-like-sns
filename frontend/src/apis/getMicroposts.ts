@@ -1,12 +1,5 @@
 import axios from 'axios';
 
-// type MicropostsType = MicropostType[];
-
-// type MicropostType = {
-//   user: string;
-//   micropost: string;
-// };
-
 // eslint-disable-next-line
 const getTimeline = async (id: string) => {
   // URLをサーバサイドのAPIにする
