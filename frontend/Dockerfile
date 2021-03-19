@@ -4,3 +4,4 @@ RUN apk add git
 COPY ["./package.json", "./yarn.lock", "./"]
 RUN yarn install
 COPY . .
+ENTRYPOINT [ "yarn", "start" ]
