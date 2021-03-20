@@ -11,14 +11,14 @@ import (
 	"github.com/kenichi-morihara/twitter-like-sns-backend/utils"
 
 	"github.com/gorilla/mux"
+	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
-// User User構造体
-type User struct {
-	ID        int
-	FirstName string
-	LastName  string
+var db *gorm.DB
+
+func init() {
+	db = utils.GetConnection()
 }
 
 func StartWebServer() {
@@ -36,11 +36,14 @@ func home(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello World")
 }
 
-func findAllUsers(w http.ResponseWriter, r *http.Request) {
-	// DB接続
-	db := utils.GetConnection()
-	defer db.Close()
+// User User構造体
+type User struct {
+	ID        int
+	FirstName string
+	LastName  string
+}
 
+func findAllUsers(w http.ResponseWriter, r *http.Request) {
 	var userList []User
 	db.Find(&userList)
 
@@ -55,10 +58,6 @@ func findByID(w http.ResponseWriter, r *http.Request) {
 		utils.RespondWithError(w, http.StatusBadRequest, "Invalid parameter")
 		return
 	}
-
-	// DB接続
-	db := utils.GetConnection()
-	defer db.Close()
 
 	var user User
 	db.Where("id = ?", id).Find(&user)
@@ -84,10 +83,6 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// DB接続
-	db := utils.GetConnection()
-	defer db.Close()
-
 	// DBにINSERTする
 	db.Create(&user)
 
@@ -110,10 +105,6 @@ func updateUser(w http.ResponseWriter, r *http.Request) {
 		utils.RespondWithError(w, http.StatusBadRequest, "JSON Unmarshaling failed .")
 		return
 	}
-
-	// DB接続
-	db := utils.GetConnection()
-	defer db.Close()
 
 	// Update実行
 	db.Save(&user)
@@ -143,10 +134,6 @@ func deleteUser(w http.ResponseWriter, r *http.Request) {
 		utils.RespondWithError(w, http.StatusBadRequest, "ID is not set .")
 		return
 	}
-
-	// DB接続
-	db := utils.GetConnection()
-	defer db.Close()
 
 	// DELETE実行
 	db.Delete(&user)
