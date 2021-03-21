@@ -22,18 +22,17 @@ func init() {
 func StartWebServer() {
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/", home)
-	router.HandleFunc("/users", findAllUsers).Methods("GET")
-	router.HandleFunc("/users/{id}", findByID).Methods("GET")
-	router.HandleFunc("/users", createUser).Methods("POST")
-	router.HandleFunc("/users", updateUser).Methods("PUT")
-	router.HandleFunc("/users", deleteUser).Methods("DELETE")
+	router.HandleFunc("/v1/users", findAllUsers).Methods("GET")
+	router.HandleFunc("/v1/users/{id}", findByID).Methods("GET")
+	router.HandleFunc("/v1/users", createUser).Methods("POST")
+	router.HandleFunc("/v1/users", updateUser).Methods("PUT")
+	router.HandleFunc("/v1/users", deleteUser).Methods("DELETE")
 
-	router.HandleFunc("/microposts", findAllMicroposts).Methods("GET")
-	//router.HandleFunc("/microposts/{id}", findMicropostByID).Methods("GET")
-	router.HandleFunc("/microposts/{id}", findAllMicropostsByUserID).Methods("GET")
-	router.HandleFunc("/microposts", createMicropost).Methods("POST")
-	router.HandleFunc("/microposts", updateMicropost).Methods("PUT")
-	router.HandleFunc("/microposts", deleteMicropost).Methods("DELETE")
+	router.HandleFunc("/v1/microposts", findMicropostsByUserID).Methods("GET")
+	router.HandleFunc("/v1/microposts/{id}", findMicropostByID).Methods("GET")
+	router.HandleFunc("/v1/microposts", createMicropost).Methods("POST")
+	router.HandleFunc("/v1/microposts", updateMicropost).Methods("PUT")
+	router.HandleFunc("/v1/microposts", deleteMicropost).Methods("DELETE")
 
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", config.Config.ServerPort), router))
 }

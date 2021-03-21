@@ -16,14 +16,6 @@ type Micropost struct {
 	Text   string
 }
 
-func findAllMicroposts(w http.ResponseWriter, r *http.Request) {
-	var micropostList []Micropost
-	db.Find(&micropostList)
-
-	// 共通化した処理を使う
-	utils.RespondWithJSON(w, http.StatusOK, micropostList)
-}
-
 func findMicropostByID(w http.ResponseWriter, r *http.Request) {
 
 	id, err := utils.GetID(r)
@@ -39,16 +31,17 @@ func findMicropostByID(w http.ResponseWriter, r *http.Request) {
 	utils.RespondWithJSON(w, http.StatusOK, micropost)
 }
 
-func findAllMicropostsByUserID(w http.ResponseWriter, r *http.Request) {
+func findMicropostsByUserID(w http.ResponseWriter, r *http.Request) {
+
 	var micropostList []Micropost
-	user_id, err := utils.GetID(r)
-	if err != nil {
-		utils.RespondWithError(w, http.StatusBadRequest, "Invalid parameter")
-		return
+	params := r.URL.Query()
+	user_id := params["id"]
+
+	if len(user_id) == 0 {
+		db.Find(&micropostList)
+	} else {
+		db.Where("user_id = ?", user_id).Find(&micropostList)
 	}
-
-	db.Where("user_id = ?", user_id).Find(&micropostList)
-
 	// 共通化した処理を使う
 	utils.RespondWithJSON(w, http.StatusOK, micropostList)
 }
