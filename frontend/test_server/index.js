@@ -1,8 +1,10 @@
 const express = require('express');
+const cors = require('cors')
 
 const microposts = require('./jsons/microposts.json');
 
 const app = express();
+app.use(cors())
 
 app.get('/v1/microposts', (req, res) => {
   if (req.query.id === '123456') {
