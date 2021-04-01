@@ -31,16 +31,26 @@ func findMicropostByID(w http.ResponseWriter, r *http.Request) {
 	utils.RespondWithJSON(w, http.StatusOK, micropost)
 }
 
-func findMicropostsByUserID(w http.ResponseWriter, r *http.Request) {
+type MicropostWithUserName struct {
+	//gorm.Model
+	ID     int
+	UserID int
+	Text   string
+	Name   string
+}
 
-	var micropostList []Micropost
+func findMicroposts(w http.ResponseWriter, r *http.Request) {
+
+	var micropostList []MicropostWithUserName
 	params := r.URL.Query()
 	user_id := params["id"]
 
 	if len(user_id) == 0 {
-		db.Find(&micropostList)
+		//db.Select("id").Find(&micropostList)
+		db.Table("microposts").Select("microposts.*, name").Joins("INNER JOIN users on users.id = microposts.user_id").Find(&micropostList)
 	} else {
-		db.Where("user_id = ?", user_id).Find(&micropostList)
+		db.Table("microposts").Select("microposts.*, name").Joins("INNER JOIN users on users.id = microposts.user_id").Where("user_id = ?", user_id).Find(&micropostList)
+		//db.Where("user_id = ?", user_id).Find(&micropostList)
 	}
 	// 共通化した処理を使う
 	utils.RespondWithJSON(w, http.StatusOK, micropostList)

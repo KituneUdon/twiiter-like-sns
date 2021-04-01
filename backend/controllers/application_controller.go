@@ -28,7 +28,7 @@ func StartWebServer() {
 	router.HandleFunc("/v1/users", updateUser).Methods("PUT")
 	router.HandleFunc("/v1/users", deleteUser).Methods("DELETE")
 
-	router.HandleFunc("/v1/microposts", findMicropostsByUserID).Methods("GET")
+	router.HandleFunc("/v1/microposts", findMicroposts).Methods("GET")
 	router.HandleFunc("/v1/microposts/{id}", findMicropostByID).Methods("GET")
 	router.HandleFunc("/v1/microposts", createMicropost).Methods("POST")
 	router.HandleFunc("/v1/microposts", updateMicropost).Methods("PUT")
