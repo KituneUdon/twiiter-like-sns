@@ -8,22 +8,18 @@ INSERT INTO users(
     name
 ) 
 VALUES 
-(
-    'Taro'
-), 
-(
-    'Jiro'
-);
-INSERT INTO users(
-    name
-) 
-VALUES 
-(
-    'Taro'
-), 
-(
-    'Jiro'
-);
+    ('Taro'), 
+    ('日下部陽治'),
+    ('古沢一寿'),
+    ('前川和弘'),
+    ('齋藤洋一'),
+    ('名取章平'),
+    ('平本琴乃'),
+    ('柴山弘明'),
+    ('足立陽奈'),
+    ('大野信生'),
+    ('Jiro');
+
 /*micropostテーブル作成*/
 CREATE TABLE microposts(
     id int PRIMARY KEY AUTO_INCREMENT, 

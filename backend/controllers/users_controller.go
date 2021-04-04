@@ -10,9 +10,8 @@ import (
 
 // User User構造体
 type User struct {
-	ID        int
-	FirstName string
-	LastName  string
+	ID   int
+	Name string
 }
 
 func findAllUsers(w http.ResponseWriter, r *http.Request) {
@@ -24,6 +23,22 @@ func findAllUsers(w http.ResponseWriter, r *http.Request) {
 }
 
 func findByID(w http.ResponseWriter, r *http.Request) {
+
+	id, err := utils.GetID(r)
+	if err != nil {
+		utils.RespondWithError(w, http.StatusBadRequest, "Invalid parameter")
+		return
+	}
+
+	var user User
+	db.Where("id = ?", id).Find(&user)
+
+	// 共通化した処理を使う
+	utils.RespondWithJSON(w, http.StatusOK, user)
+}
+
+//テスト用
+func FindByID(w http.ResponseWriter, r *http.Request) {
 
 	id, err := utils.GetID(r)
 	if err != nil {
