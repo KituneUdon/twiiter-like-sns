@@ -33,14 +33,19 @@ INSERT INTO microposts(
     text
 ) 
 VALUES 
-(
-    1, 
-    'Yamada'
-), 
-(
-    2, 
-    'Sato'
-);
+(1, 'Yamada'), 
+(2, 'Sato'),
+(2, 'Yamada'),
+(3, 'Yamada'),
+(4, 'Yamada'),
+(5, 'Yamada'),
+(5, 'Yamada'), 
+(6, 'Sato'),
+(7, 'Yamada'),
+(8, 'Yamada'),
+(1, '私は以前ちっともこの養成人という事の時が生れなます。'),
+(1, '坊ちゃんへなっありものもおもに当時をもうたならます。')
+;
 CREATE USER 'go'@'%' IDENTIFIED BY 'p@55vv0rcl';
 /*GRANT all ON sample.* TO 'go'@'%';*/
 GRANT ALL PRIVILEGES ON *.* TO 'go'@'%' WITH GRANT OPTION;
