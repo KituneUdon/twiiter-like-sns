@@ -54,7 +54,7 @@ const Profile: FC = () => {
         </Col>
       </Row>
       <Row>
-        <UserInfo follower={followerCount} following={followingCount} />
+        <UserInfo followerCount={followerCount} followingCount={followingCount} />
       </Row>
     </Container>
   );
