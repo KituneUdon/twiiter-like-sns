@@ -15,16 +15,16 @@ const Img = styled.img`
 
 type userprofileType = {
   displayName: string;
-  follower: number;
-  following: number;
+  followerCount: number;
+  followingCount: number;
   postedNumber: number;
 }
 
 const Profile: FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [displayName, setDisplayName] = useState('');
-  const [follower, setFollower] = useState(0);
-  const [following, setFollowing] = useState(0);
+  const [followerCount, setFollowerCount] = useState(0);
+  const [followingCount, setFollowingCount] = useState(0);
   const [postedNumber, setPostedNumner] = useState(0);
 
   useEffect(() => {
@@ -32,8 +32,8 @@ const Profile: FC = () => {
 
     response.then((data: AxiosResponse<userprofileType>) => {
       setDisplayName(data.data.displayName);
-      setFollower(data.data.follower);
-      setFollowing(data.data.following);
+      setFollowerCount(data.data.followerCount);
+      setFollowingCount(data.data.followingCount);
       setPostedNumner(data.data.postedNumber);
     }).catch(() => {
       setErrorMessage('通信エラーが発生しました。')
@@ -54,7 +54,7 @@ const Profile: FC = () => {
         </Col>
       </Row>
       <Row>
-        <UserInfo follower={follower} following={following} />
+        <UserInfo follower={followerCount} following={followingCount} />
       </Row>
     </Container>
   );
