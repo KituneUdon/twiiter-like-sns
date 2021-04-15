@@ -6,6 +6,7 @@ import { AxiosResponse } from 'axios';
 import profileIcon from '../image/default_profile_icon.png';
 import UserInfo from './UserInfo';
 import getProfile from '../apis/getProfile'
+import UserProfile from '../types/UserProfile';
 
 const Img = styled.img`
   width: 100%;
@@ -13,17 +14,10 @@ const Img = styled.img`
   height: auto;
 `;
 
-type userprofileType = {
-  displayName: string;
-  followerCount: number;
-  followingCount: number;
-  postedNumber: number;
-}
-
 const Profile: FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
-  const userprofileDefaultValue: userprofileType = {
+  const userprofileDefaultValue: UserProfile = {
     displayName: "",
     followerCount: 0,
     followingCount: 0,
@@ -34,7 +28,7 @@ const Profile: FC = () => {
   useEffect(() => {
     const response = getProfile('123456');
 
-    response.then((data: AxiosResponse<userprofileType>) => {
+    response.then((data: AxiosResponse<UserProfile>) => {
       setUserprofile({
         displayName: data.data.displayName,
         followerCount: data.data.followerCount,
