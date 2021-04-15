@@ -22,19 +22,25 @@ type userprofileType = {
 
 const Profile: FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
-  const [displayName, setDisplayName] = useState('');
-  const [followerCount, setFollowerCount] = useState(0);
-  const [followingCount, setFollowingCount] = useState(0);
-  const [postedNumber, setPostedNumner] = useState(0);
+
+  const userprofileDefaultValue: userprofileType = {
+    displayName: "",
+    followerCount: 0,
+    followingCount: 0,
+    postedNumber: 0,
+  }
+  const [userprofile, setUserprofile] = useState(userprofileDefaultValue)
 
   useEffect(() => {
     const response = getProfile('123456');
 
     response.then((data: AxiosResponse<userprofileType>) => {
-      setDisplayName(data.data.displayName);
-      setFollowerCount(data.data.followerCount);
-      setFollowingCount(data.data.followingCount);
-      setPostedNumner(data.data.postedNumber);
+      setUserprofile({
+        displayName: data.data.displayName,
+        followerCount: data.data.followerCount,
+        followingCount: data.data.followingCount,
+        postedNumber: data.data.postedNumber
+      })
     }).catch(() => {
       setErrorMessage('通信エラーが発生しました。')
     })
@@ -48,13 +54,13 @@ const Profile: FC = () => {
           <Img src={profileIcon} alt="プロフィール画像" />
         </Col>
         <Col md={8} sm={12} xs={8}>
-          <p>{displayName}</p>
+          <p>{userprofile.displayName}</p>
           <a href="http://localhost:4000">view my profile</a>
-          <p>投稿数：{postedNumber}</p>
+          <p>投稿数：{userprofile.postedNumber}</p>
         </Col>
       </Row>
       <Row>
-        <UserInfo followerCount={followerCount} followingCount={followingCount} />
+        <UserInfo followerCount={userprofile.followerCount} followingCount={userprofile.followingCount} />
       </Row>
     </Container>
   );
