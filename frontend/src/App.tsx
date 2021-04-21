@@ -22,7 +22,7 @@ const App: FC = () => {
             <PostForm id='123456' setErrorMessage={setErrorMessage}/>
           </Col>
           <Col xs={12} sm={8}>
-            <Microposts errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>
+            <Microposts setErrorMessage={setErrorMessage}/>
           </Col>
         </Row>
       </Container>

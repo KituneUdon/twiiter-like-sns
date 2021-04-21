@@ -16,12 +16,12 @@ type MicropostType = {
 };
 
 type Props = {
-  errorMessage: string
-  setErrorMessage: (message: string) => void
+  setErrorMessage: React.Dispatch<React.SetStateAction<string>>
 }
 
-const Timeline: FC<Props> = ({errorMessage, setErrorMessage}) => {
+const Timeline: FC<Props> = ({setErrorMessage}) => {
   const [microposts, setMicroposts] = useState<MicropostsType>();
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const response = getMicroposts('123456');
@@ -32,17 +32,21 @@ const Timeline: FC<Props> = ({errorMessage, setErrorMessage}) => {
           Array.isArray(m.data) && setMicroposts(m.data),
       )
       .catch(() =>
-        setErrorMessage(
+        setError(
           '通信エラーが発生しました。10分程、時間をおいてアクセスしてみてください。',
         ),
       );
-  }, [setErrorMessage]);
+  }, []);
+
+  useEffect(() => {
+    setErrorMessage(error)
+  }, [error, setErrorMessage])
 
   return (
     <>
       <p>Micropost Feed</p>
       <hr />
-      {errorMessage && (
+      {
         Array.isArray(microposts) &&
         microposts.map((micropost) => (
           <MicropostElement
@@ -52,7 +56,7 @@ const Timeline: FC<Props> = ({errorMessage, setErrorMessage}) => {
             key={micropost.micropostId}
           />
         ))
-      )}
+      }
     </>
   );
 };
