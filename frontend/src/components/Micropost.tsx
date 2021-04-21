@@ -33,7 +33,7 @@ const Timeline: FC<Props> = ({errorMessage, setErrorMessage}) => {
       )
       .catch(() =>
         setErrorMessage(
-          '通信エラーが発生しました。\n10分程、時間をおいてアクセスしてみてください',
+          '通信エラーが発生しました。10分程、時間をおいてアクセスしてみてください。',
         ),
       );
   }, [setErrorMessage]);

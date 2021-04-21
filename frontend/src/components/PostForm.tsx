@@ -19,7 +19,7 @@ const PostForm: FC<Props> = ({id, setErrorMessage}) => {
   const [formText, setFormText] = useState('');
 
   const handlePostMicropost = () => {
-    postMicropost(id, formText).catch(() => setErrorMessage('通信エラーが発生しました。'))
+    postMicropost(id, formText).catch(() => setErrorMessage('通信エラーが発生しました。10分程、時間をおいてアクセスしてみてください。'))
   }
 
   return (
