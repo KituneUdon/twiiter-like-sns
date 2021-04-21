@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import './App.css';
 
-import { Container, Col, Row } from 'react-bootstrap';
+import { Container, Col, Row, Alert } from 'react-bootstrap';
 
 import Profile from './components/Profile';
 import PostForm from './components/PostForm';
@@ -14,7 +14,7 @@ const App: FC = () => {
   return (
     <>
       <Header />
-      {errorMessage && <p>{errorMessage}</p>}
+      {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
       <Container>
         <Row>
           <Col xs={12} sm={4}>
