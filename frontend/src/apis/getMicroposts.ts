@@ -4,7 +4,7 @@ import axios from 'axios';
 const getTimeline = async (id: string) => {
   // URLをサーバサイドのAPIにする
   const response = await axios
-    .get(`http://localhost:3000/v1/microposts?id=${id}`)
+    .get(`http://localhost:3000/v1/microposts?userId=${id}`)
     .then((res) => res);
 
   return response;
