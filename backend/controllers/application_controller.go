@@ -20,7 +20,7 @@ func init() {
 }
 
 func StartWebServer() {
-	router := mux.NewRouter().StrictSlash(true)
+	router := mux.NewRouter()
 	router.HandleFunc("/", home)
 	router.HandleFunc("/v1/users", findAllUsers).Methods("GET")
 	router.HandleFunc("/v1/users/{id}", findByID).Methods("GET")
