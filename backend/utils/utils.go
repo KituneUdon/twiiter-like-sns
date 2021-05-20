@@ -39,6 +39,7 @@ func GetConnection() *gorm.DB {
 		db, err := gorm.Open(DBMS, CONNECT)
 		log.Printf("MySQLまだ? %v", err)
 		if err == nil {
+			log.Printf("MySQLきたこれ")
 			db.LogMode(true)
 			return db
 		}
