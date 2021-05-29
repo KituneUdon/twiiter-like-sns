@@ -2,15 +2,20 @@ import React, { FC } from 'react';
 
 import { Container, Row, Col } from 'react-bootstrap';
 
-const UserInfo: FC = () => (
+type Props = {
+  followerCount: number;
+  followingCount: number;
+}
+
+const UserInfo: FC<Props> = ({followerCount, followingCount}) => (
   <Container>
     <Row>
       <Col>
-        <p>10</p>
+        <p>{followerCount}</p>
         <p>follower</p>
       </Col>
       <Col>
-        <p>20</p>
+        <p>{followingCount}</p>
         <p>following</p>
       </Col>
     </Row>
