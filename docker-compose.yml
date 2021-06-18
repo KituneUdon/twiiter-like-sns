@@ -4,7 +4,7 @@ services:
     golang:
         build: ./backend
         ports:
-            - "80:8080"
+            - "3000:3000"
         depends_on:
             - mysql
     # mysql のサービスを追加
@@ -16,6 +16,7 @@ services:
         - 5000:3306 #どのポートを開放するかを設定":"の左側はホストのポート、右側はコンテナのポート
       volumes: # ./mysqlと言うローカルディレクトりをコンテナの指定ディレクトリにマウント
         - ./database/init:/docker-entrypoint-initdb.d  
+        - ./database/etc/my.cnf:/etc/mysql/my.cnf
       hostname: mysql
       environment:
         MYSQL_ROOT_USERNAME: ${MYSQL_ROOT_USERNAME}

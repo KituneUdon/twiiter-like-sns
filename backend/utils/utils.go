@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
@@ -33,14 +34,17 @@ func GetConnection() *gorm.DB {
 	DB_PORT := config.Config.DbPort
 	DBNAME := config.Config.DbName
 	CONNECT := USER + ":" + PASS + "@" + "tcp(" + DB_HOST + ":" + DB_PORT + ")/" + DBNAME
-	db, err := gorm.Open(DBMS, CONNECT)
-	// 接続に失敗したらエラーログを出して終了する
-	if err != nil {
-		log.Fatalf("DB connection failed %v", err)
-	}
-	db.LogMode(true)
 
-	return db
+	for {
+		db, err := gorm.Open(DBMS, CONNECT)
+		if err == nil {
+			log.Printf("MySQLきたこれ")
+			db.LogMode(true)
+			return db
+		}
+		log.Printf("MySQLまだ? %v", err)
+		time.Sleep(3 * time.Second)
+	}
 }
 
 // GetID リクエストからIDを取得する

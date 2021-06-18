@@ -2,45 +2,19 @@ package controllers
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
 
-	"github.com/kenichi-morihara/twitter-like-sns-backend/config"
 	"github.com/kenichi-morihara/twitter-like-sns-backend/utils"
-
-	"github.com/gorilla/mux"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 // User User構造体
 type User struct {
-	ID        int
-	FirstName string
-	LastName  string
-}
-
-func StartWebServer() {
-	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/", home)
-	router.HandleFunc("/users", findAllUsers).Methods("GET")
-	router.HandleFunc("/users/{id}", findByID).Methods("GET")
-	router.HandleFunc("/users", createUser).Methods("POST")
-	router.HandleFunc("/users", updateUser).Methods("PUT")
-	router.HandleFunc("/users", deleteUser).Methods("DELETE")
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", config.Config.ServerPort), router))
-}
-
-func home(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello World")
+	ID   int
+	Name string
 }
 
 func findAllUsers(w http.ResponseWriter, r *http.Request) {
-	// DB接続
-	db := utils.GetConnection()
-	defer db.Close()
-
 	var userList []User
 	db.Find(&userList)
 
@@ -56,9 +30,21 @@ func findByID(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// DB接続
-	db := utils.GetConnection()
-	defer db.Close()
+	var user User
+	db.Where("id = ?", id).Find(&user)
+
+	// 共通化した処理を使う
+	utils.RespondWithJSON(w, http.StatusOK, user)
+}
+
+//テスト用
+func FindByID(w http.ResponseWriter, r *http.Request) {
+
+	id, err := utils.GetID(r)
+	if err != nil {
+		utils.RespondWithError(w, http.StatusBadRequest, "Invalid parameter")
+		return
+	}
 
 	var user User
 	db.Where("id = ?", id).Find(&user)
@@ -84,10 +70,6 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// DB接続
-	db := utils.GetConnection()
-	defer db.Close()
-
 	// DBにINSERTする
 	db.Create(&user)
 
@@ -110,10 +92,6 @@ func updateUser(w http.ResponseWriter, r *http.Request) {
 		utils.RespondWithError(w, http.StatusBadRequest, "JSON Unmarshaling failed .")
 		return
 	}
-
-	// DB接続
-	db := utils.GetConnection()
-	defer db.Close()
 
 	// Update実行
 	db.Save(&user)
@@ -143,10 +121,6 @@ func deleteUser(w http.ResponseWriter, r *http.Request) {
 		utils.RespondWithError(w, http.StatusBadRequest, "ID is not set .")
 		return
 	}
-
-	// DB接続
-	db := utils.GetConnection()
-	defer db.Close()
 
 	// DELETE実行
 	db.Delete(&user)
