@@ -14,6 +14,15 @@ const Img = styled.img`
   height: auto;
 `;
 
+type UserprofileResponseType = {
+  user: {
+    displayName: "",
+    followerCount: 0,
+    followingCount: 0,
+    postedNumber: 0,
+  }
+}
+
 const Profile: FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -28,17 +37,17 @@ const Profile: FC = () => {
   useEffect(() => {
     const response = getProfile('123456');
 
-    response.then((data: AxiosResponse<UserProfile>) => {
+    response.then((data: AxiosResponse<UserprofileResponseType>) => {
       setUserprofile({
-        displayName: data.data.displayName,
-        followerCount: data.data.followerCount,
-        followingCount: data.data.followingCount,
-        postedNumber: data.data.postedNumber
+        displayName: data.data.user.displayName,
+        followerCount: data.data.user.followerCount,
+        followingCount: data.data.user.followingCount,
+        postedNumber: data.data.user.postedNumber
       })
     }).catch(() => {
       setErrorMessage('通信エラーが発生しました。')
     })
-  })
+  }, [])
 
   return (
     <Container>

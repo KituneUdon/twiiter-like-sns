@@ -4,7 +4,7 @@ import axios from 'axios';
 const getTimeline = async (id: string) => {
   // URLをサーバサイドのAPIにする
   const response = await axios
-    .get(`http://localhost:3000/v1/userprofile?id=${id}`)
+    .get(`http://localhost:3000/v1/userprofile?userId=${id}`)
     .then((res) => res);
 
   return response;

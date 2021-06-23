@@ -10,7 +10,7 @@ type Props = {
   name: string;
   micropost: string;
   createdAt: string;
-  key: string;
+  key: number;
 };
 
 const Container = styled(Row)`

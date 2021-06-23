@@ -7,9 +7,9 @@ services:
     ports: 
       - "4000:4000"
     container_name: frontend
-  backend:
-    build: ./test_server
-    image: twiiter-like-sns-backend-test
+  mock:
+    build: ./mock
+    image: twiiter-like-sns-mock
     ports: 
-      - "3000:3000"
-    container_name: backend_test_server
+      - "127.0.0.1:3000:3000"
+    container_name: mock

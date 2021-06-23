@@ -5,18 +5,18 @@ import MicropostElement from './MicropostElement';
 
 import getMicroposts from '../apis/getMicroposts';
 
-type MicropostsType = MicropostType[];
+type MicropostsType = {microposts: MicropostType[]};
 
 type MicropostType = {
-  userId: string;
+  userId: number;
   userName: string;
   micropost: string;
-  micropostId: string;
+  micropostId: number;
   createAt: string;
 };
 
 const Timeline: FC = () => {
-  const [microposts, setMicroposts] = useState<MicropostsType>();
+  const [microposts, setMicroposts] = useState<MicropostType[]>();
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -24,8 +24,11 @@ const Timeline: FC = () => {
 
     response
       .then(
-        (m: AxiosResponse<MicropostType>) =>
-          Array.isArray(m.data) && setMicroposts(m.data),
+        (m: AxiosResponse<MicropostsType>) => {
+          if (Array.isArray(m.data.microposts)) {
+            setMicroposts(m.data.microposts)
+          }
+        }
       )
       .catch(() =>
         setError(
